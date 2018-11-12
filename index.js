@@ -72,5 +72,18 @@ governing permissions and limitations under the License.
     req.send();
   }
 
-  window.$loadIcons = window.loadIcons = loadIcons;
-}());
+  if (typeof module !== 'undefined' && module.exports) {
+    // Node.js Support
+    module.exports = loadIcons;
+  }
+  else if (global && typeof global.define == 'function') {
+    (function(define) {
+      // AMD Support
+      define(function() { return loadIcons; });
+    }(global.define));
+  }
+  else {
+    // Browser support
+    global.loadIcons = loadIcons;
+  }
+}(this));
