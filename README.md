@@ -25,7 +25,14 @@ You can load the sprite sheet with:
 
 ```js
 const loadIcons = require('loadicons');
-loadIcons('sprite.svg');
+loadIcons('sprite.svg', function(err, svg) {
+  if (err) {
+    console.error('Everything failed because ' + error);
+  }
+  else {
+    console.log('SVG loaded!', svg);
+  }
+});
 ```
 
 Then, you can use loaded icons with `<use>`:
