@@ -10,7 +10,21 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-(function() {
+// UMD pattern via umdjs
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([], factory);
+  }
+  else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like
+    module.exports = factory();
+  }
+  else {
+    // Browser
+    root.loadIcons = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function() {
   function injectSVG(svgURL, callback) {
     function handleError(string) {
       string = 'loadIcons: '+string;
@@ -72,18 +86,5 @@ governing permissions and limitations under the License.
     req.send();
   }
 
-  if (typeof module !== 'undefined' && module.exports) {
-    // Node.js Support
-    module.exports = loadIcons;
-  }
-  else if (global && typeof global.define == 'function') {
-    (function(define) {
-      // AMD Support
-      define(function() { return loadIcons; });
-    }(global.define));
-  }
-  else {
-    // Browser support
-    global.loadIcons = loadIcons;
-  }
-}(this));
+  return loadIcons;
+}));
