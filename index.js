@@ -25,18 +25,18 @@ governing permissions and limitations under the License.
     root.loadIcons = factory();
   }
 }(typeof self !== 'undefined' ? self : this, function() {
-  function injectSVG(svgURL, callback) {
-    function handleError(string) {
-      string = 'loadIcons: '+string;
-      var error = new Error(string);
+  function handleError(string) {
+    string = 'loadIcons: '+string;
+    var error = new Error(string);
 
-      console.error(error.toString());
+    console.error(error.toString());
 
-      if (typeof callback === 'function') {
-        callback(error);
-      }
+    if (typeof callback === 'function') {
+      callback(error);
     }
+  }
 
+  function injectSVG(svgURL, callback) {
     var error;
     // 200 for web servers, 0 for CEP panels
     if (this.status !== 200 && this.status !== 0) {
