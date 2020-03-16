@@ -27,7 +27,7 @@ You can load the sprite sheet with:
 const loadIcons = require('loadicons');
 loadIcons('sprite.svg', function(err, svg) {
   if (err) {
-    console.error('Everything failed because ' + error);
+    console.error('Everything failed because ' + err);
   }
   else {
     console.log('SVG loaded!', svg);
